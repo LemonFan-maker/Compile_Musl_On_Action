@@ -39,7 +39,10 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag: ${{ github.ref }}
+          tag_name: ${{ github.ref }}
           name: aarch64-musl-linux-make-${{ github.sha }} 
+          body: ${{ github.sha }}
+          draft: false
+          prerelease: false
           files: |
             ${{ github.workspace }}/musl-cross-make-aarch64.tgz
