@@ -33,11 +33,9 @@ jobs:
           cd ..
           tar -cvpzf musl-cross-make-aarch64.tgz musl-cross-make/ > /dev/null
 
-      - name: Publish unique release
-        uses: ncipollo/release-action@v1.13.0
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          artifacts: |
+          name: aarch64-musl-linux-make-${{ github.sha }} 
+          files: |
             ${{ github.workspace }}/musl-cross-make-aarch64.tgz
-          makeLatest: false
-          name: musl-cross-make-aarch64-${{ github.sha }}
-          tag: musl-cross-make-aarch64-${{ github.sha }}
