@@ -17,7 +17,7 @@ jobs:
 
       - name: Install Depend
         run: |
-          sudo apt install make autoconf automake libtool m4 wget getconf gzip bzip2 bison g++ git cmake pkg-config re2c ca-certificates
+          sudo apt install make autoconf automake libtool m4 wget gzip bzip2 bison g++ git cmake pkg-config re2c build-essential ca-certificates
 
       - name: Try Compile 
         run: |
