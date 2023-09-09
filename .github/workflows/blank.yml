@@ -23,5 +23,21 @@ jobs:
         run: |
           git clone https://github.com/LemonFan-maker/musl-cross-make.git
           cd musl-cross-make
-          make 
-          
+          make
+          cd ..
+
+      - name: Make Tar
+        run : |
+          cd ${{ github.workspace }}/musl-cross-make
+          rm -rf sources 
+          cd ..
+          tar -cvpzf musl-cross-make-aarch64.tgz musl-cross-make/ > /dev/null
+
+      - name: Publish unique release
+        uses: ncipollo/release-action@v1.13.0
+        with:
+          artifacts: |
+            ${{ github.workspace }}/musl-cross-make-aarch64.tgz
+          makeLatest: false
+          name: musl-cross-make-aarch64-${{ github.sha }}
+          tag: musl-cross-make-aarch64-${{ github.sha }}
