@@ -30,11 +30,16 @@ jobs:
           rm -rf sources 
           cd ..
           tar -cvpzf musl-cross-make-aarch64.tgz musl-cross-make/ > /dev/null
-
+      - name: Create SHA
+        run : |
+          sha1sum ${{ github.workspace }}/musl-cross-make-aarch64.tgz > hash.sha1
+          filename="hash.sha1"
+          result=$(head -c 16 "$filename")
+          echo "::set-env name=SHA::$result"
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.sha }}
+          tag_name: $SHA
           name: aarch64-musl-linux-make-${{ github.sha }} 
           body: ${{ github.sha }}
           draft: false
